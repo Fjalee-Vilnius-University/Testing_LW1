@@ -1,10 +1,10 @@
-package com.Testing_LW1.Testing_LW1;
+package com.HelloWebApp.HelloWebApp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestingLw1ApplicationTests {
+class HelloWebAppApplicationTests {
 
 	@Test
 	void contextLoads() {
