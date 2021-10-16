@@ -1,20 +1,37 @@
 package com.prekes.web.prekesweb.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity // map to db table. Default table name is the name of entity class
 public class Zmogus implements Comparable<Zmogus> {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO) // JPA autogenerates value of id
 	private int id;
+	
 	private String vardas;
+	private String role;
 	
-	public Zmogus() {}
+	protected Zmogus() {}
 	
-	public Zmogus(int id, String vardas) {
+	public Zmogus(String vardas, String role) {
+		this.vardas = vardas;
+		this.role = role;
+	}
+
+	/*public Zmogus(int id, String vardas, String role) {
 		super();
 		this.id = id;
 		this.vardas = vardas;
-	}
+		this.role = role;
+	}*/
 
 	@Override
 	public String toString() {
-		return "Zmogus [id=" + id + ", vardas=" + vardas + "]";
+		return "Zmogus [id=" + id + ", vardas=" + vardas + " role=" + role + "]";
 	}
 
 	@Override
@@ -58,6 +75,14 @@ public class Zmogus implements Comparable<Zmogus> {
 
 	public void setVardas(String vardas) {
 		this.vardas = vardas;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

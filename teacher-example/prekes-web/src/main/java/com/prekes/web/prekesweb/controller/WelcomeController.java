@@ -31,7 +31,7 @@ public class WelcomeController {
 	@GetMapping("/welcome")
 	public String showWelcomePage(@RequestParam String name, ModelMap model) {
 		// method parameter name which gets value of parameter in request URI has annotation @RequestParam
-		// put value name value from request parameter to model variable "name"
+		// put value of name from request parameter to model variable "name"
 		// this model is passed to view
 		model.put("name", name);
 		return "welcome"; // view resolver /WEB-INF/jsp/welcome.jsp

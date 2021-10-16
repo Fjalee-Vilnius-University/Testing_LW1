@@ -8,9 +8,8 @@ class PrekeTest {
 
 	@Test
 	void testPrekeIntStringStringFloat() {
-		Preke p = new Preke(1, "Pienas", "LT", 1);
+		Preke p = new Preke("Pienas", "LT", 1);
 		assertAll("Test Preke constructor",
-				() -> assertEquals(1, p.getKodas()),
 				() -> assertEquals("Pienas", p.getPavadinimas()),
 				() -> assertEquals("LT", p.getSalis()),
 				() -> assertEquals(1, p.getKainaVnt())

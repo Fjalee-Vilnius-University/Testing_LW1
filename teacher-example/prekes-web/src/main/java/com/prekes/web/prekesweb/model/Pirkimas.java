@@ -21,6 +21,9 @@ public class Pirkimas implements Comparable<Pirkimas> {
 		this.date = date;
 	}
 
+	public String getPirkimasId() {
+		return zmogausId + "-" + prekesKodas + "-" + date;
+	}
 	@Override
 	public String toString() {
 		return "Pirkimas [zmogausId=" + zmogausId + ", prekesKodas=" + prekesKodas + ", vnt=" + vnt + ", date=" + date

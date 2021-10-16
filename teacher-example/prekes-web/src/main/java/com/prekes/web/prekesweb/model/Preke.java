@@ -1,14 +1,31 @@
 package com.prekes.web.prekesweb.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Preke implements Comparable<Preke> {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO) // JPA autogenerates value of id
 	private int kodas;
     private String pavadinimas;
     private String salis;
     private float kainaVnt;
     
     public Preke() {}
-    
+
+	public Preke(String pavadinimas, String salis, float kainaVnt) {
+		super();
+		if(kodas < 0 || pavadinimas == null)
+            throw new NullPointerException();
+		this.pavadinimas = pavadinimas;
+		this.salis = salis;
+		this.kainaVnt = kainaVnt;
+	}
+
 	public Preke(int kodas, String pavadinimas, String salis, float kainaVnt) {
 		super();
 		if(kodas < 0 || pavadinimas == null)

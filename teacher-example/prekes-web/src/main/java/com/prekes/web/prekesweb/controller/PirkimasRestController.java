@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prekes.web.prekesweb.model.Pirkimas;
@@ -27,5 +28,10 @@ public class PirkimasRestController {
 		List<Pirkimas> pirkimai = pirkimasService.findAll();
 		pirkimasService.updateAllPrekesPav(pirkimai);
 		return pirkimai;
+	}
+	
+	@GetMapping("/pirkimai/{pirkimoId}") 
+	public Pirkimas getPirkimasById(@PathVariable String pirkimoId) {
+		return pirkimasService.findById(pirkimoId); // Spring converts java object to -> JSON
 	}
 }

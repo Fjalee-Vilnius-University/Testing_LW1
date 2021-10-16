@@ -2,6 +2,7 @@ package com.prekes.web.prekesweb.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class ZmogusRestController {
 	// GET request
 	// localhost:8080/zmones
 	@GetMapping("/zmones")		
-	public List<Zmogus> zmonesJson() {
+	public Iterable<Zmogus> zmonesJson() {
 		return service.findAll(); // Spring converts java object to -> JSON
 	}
 	
@@ -51,7 +52,7 @@ public class ZmogusRestController {
 	
 	// POST request
 	// http://localhost:8080/zmones/2/pirkimai	
-	// POST request body example JSON: {"zmogausId":1,"prekesKodas":2,"vnt":10,"date":"2222-01-01","prekesPav":null}
+	// POST request body example JSON: {"zmogausId":2,"prekesKodas":2,"vnt":10,"date":"2222-01-01","prekesPav":null}
 	// Value of response header 'location' is set to uri of newly created source, 
 	// e.g., http://localhost:8080/zmones/1/pirkimai/1-2-2222-01-01
 	@PostMapping("/zmones/{zmogausId}/pirkimai") 
@@ -62,7 +63,7 @@ public class ZmogusRestController {
 		Pirkimas p = servicePirkimas.add(newPirkimas);
 
 		if (p == null)
-			return ResponseEntity.noContent().build();
+			return ResponseEntity.noContent().build(); // status: 204 No content
 
 		// if addition is Success, then return URI of new resource Pirkimas in response header
 		// URI = "/zmones/{zmogausId}/pirkimai/{pirkimoId}"
@@ -71,7 +72,7 @@ public class ZmogusRestController {
                 .path("/{id}").buildAndExpand(p.getZmogausId()+"-"+p.getPrekesKodas()+"-"+p.getDate()).toUri();
 
 		// return response with status="created" at "location": 
-		return ResponseEntity.created(location).build(); 
+		return ResponseEntity.created(location).build();  // status: 201 Created
 	}
 	
 	// GET request

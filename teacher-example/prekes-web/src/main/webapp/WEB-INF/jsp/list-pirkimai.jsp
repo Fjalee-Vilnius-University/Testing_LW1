@@ -1,16 +1,12 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<html>
-<head>
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<%@ include file="common/header.jspf"%>
+<%@ include file="common/navigation.jspf"%>
+
 <div class="container">
 <H1>List of Pirkimai:</H1>
 <!--
 <p>${pirkimai}</p>
 -->
-<table class="table table-striped" border="1">
+<table border="1">
 <caption>Pirkimai</caption>
 <thead>
 <tr>
@@ -31,15 +27,15 @@
 <td>${pirkimas.prekesPav}</td>
 <td>${pirkimas.vnt}</td>
 <td>${pirkimas.date}</td>
-<td><a type="button" class="btn btn-success" href="/update-pirkimas?id=${pirkimas.zmogausId}">UPDATE</a></td>
-<td><a type="button" class="btn btn-warning" href="/delete-pirkimas?id=${pirkimas.zmogausId}">DELETE</a></td>
+<td><a type="button" href="/update-pirkimas?id=${pirkimas.zmogausId}">UPDATE</a></td>
+<td><a type="button" href="/delete-pirkimas?id=${pirkimas.zmogausId}">DELETE</a></td>
 </tr>
 </c:forEach>
 
 </tbody>
 </table>
 <div>
-<p><a class="button" href="add-pirkimas">ADD Pirkimas</a></p>
+<a href="add-pirkimas">ADD Pirkimas</a>
 </div>
 </div>
-</body>
+<%@ include file="common/footer.jspf"%>

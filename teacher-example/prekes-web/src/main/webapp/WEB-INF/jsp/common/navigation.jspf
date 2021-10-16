@@ -1,17 +1,8 @@
 <nav role="navigation" class="navbar navbar-default">
-	<div class="">
-		<a href="http://www.in28minutes.com" class="navbar-brand">in28Minutes</a>
-	</div>
 	<div class="navbar-collapse">
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="/">Home</a></li>
-			<li><a href="/list-prekes">Prekes</a></li>
-
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			
-			<li><a href="/logout">Logout</a></li>
-
-		</ul>
+			<a href="/">Home</a>
+			<a href="/list-prekes">Prekes</a>
+			<a href="/list-zmones">Zmones</a>
+			<a href="/list-pirkimai">Pirkimai</a>
 	</div>
 </nav>
