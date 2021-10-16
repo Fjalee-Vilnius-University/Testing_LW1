@@ -13,6 +13,11 @@ public class TelNr {
     private String telNr;
     private int userId;
 
+    public TelNr(String telNr, int userId) {
+        this.telNr = telNr;
+        this.userId = userId;
+    }
+
     public String getTelNr() {
         return telNr;
     }
