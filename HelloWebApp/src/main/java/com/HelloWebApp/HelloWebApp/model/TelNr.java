@@ -13,6 +13,9 @@ public class TelNr {
     private String telNr;
     private int userId;
 
+    protected TelNr() {
+    }
+
     public TelNr(String telNr, int userId) {
         this.telNr = telNr;
         this.userId = userId;
