@@ -5,6 +5,8 @@ import com.HelloWebApp.HelloWebApp.repository.TelNrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TelNrService {
 
@@ -14,4 +16,8 @@ public class TelNrService {
     public void update (TelNr telNr) {
         repository.save(telNr);
     }
+    public List<TelNr> findAll() {
+        return (List<TelNr>)repository.findAll();
+    }
+
 }

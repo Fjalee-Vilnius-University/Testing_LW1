@@ -17,7 +17,7 @@ public class TelNrCommandLineRunner implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("~~~~~~ PrekeCommandLineRunner ~~~~~~");
+		System.out.println("~~~~~~ TelNrCommandLineRunner ~~~~~~");
 		repository.save(new TelNr("+37061111111", 1));
 		repository.save(new TelNr("+37062222222", 2));
 		repository.save(new TelNr("+37063333333", 3));
