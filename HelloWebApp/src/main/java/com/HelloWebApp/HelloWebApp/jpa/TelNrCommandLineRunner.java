@@ -8,11 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.prekes.web.prekesweb.model.Preke;
-import com.prekes.web.prekesweb.repository.PrekeRepository;
-
-// CommandLineRunner is invoked on application start
-
 @Component
 public class TelNrCommandLineRunner implements CommandLineRunner{
 	private static final Logger log = LoggerFactory.getLogger(TelNrCommandLineRunner.class);
