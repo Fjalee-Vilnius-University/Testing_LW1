@@ -10,5 +10,5 @@ CREATE TABLE saskaita (
    id INT AUTO_INCREMENT PRIMARY KEY,
    telNrId INT NOT NULL,
    menuo INT NOT NULL,
-   suma DECIMAL NOT NULL
+   suma INT NOT NULL
 );
