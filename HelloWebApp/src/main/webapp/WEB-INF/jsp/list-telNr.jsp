@@ -23,14 +23,13 @@
 <td>${nr.id}</td>
 <td>${nr.telNr}</td>
 <td>${nr.userId}</td>
-<td><a type="button" href="/delete-telNr?id=${telNr.id}">DELETE</a></td>
+<td><a type="button" href="/delete-telNr/${nr.id}">DELETE</a></td>
 </tr>
 </c:forEach>
 
 </tbody>
 </table>
 <div>
-<a href="add-telNr">ADD TelNr</a>
 </div>
 </div>
 <%@ include file="common/footer.jspf"%>

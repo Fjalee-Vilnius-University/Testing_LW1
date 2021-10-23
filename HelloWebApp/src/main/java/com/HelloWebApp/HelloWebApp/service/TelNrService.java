@@ -19,5 +19,8 @@ public class TelNrService {
     public List<TelNr> findAll() {
         return (List<TelNr>)repository.findAll();
     }
+    public void deleteById(int id) {
+        repository.deleteById(id);
+    }
 
 }
