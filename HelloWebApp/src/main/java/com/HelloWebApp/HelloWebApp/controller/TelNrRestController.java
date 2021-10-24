@@ -20,7 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 */
 
 @RestController
-public class PrekeRestController {
+public class TelNrRestController {
 	@Autowired
 	TelNrService service;
 /*
