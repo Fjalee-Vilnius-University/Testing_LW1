@@ -22,5 +22,6 @@ public class TelNrService {
     public void deleteById(int id) {
         repository.deleteById(id);
     }
+    public TelNr add (TelNr telNr) { return repository.save(telNr); }
 
 }
