@@ -23,6 +23,7 @@
 <td>${nr.id}</td>
 <td>${nr.telNr}</td>
 <td>${nr.userId}</td>
+<td><a type="button" href="/update-telNr/${nr.id}">UPDATE</a></td>
 <td><a type="button" href="/delete-telNr/${nr.id}">DELETE</a></td>
 </tr>
 </c:forEach>
