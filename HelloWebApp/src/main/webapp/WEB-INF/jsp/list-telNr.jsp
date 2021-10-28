@@ -27,8 +27,16 @@
 <td><a type="button" href="/delete-telNr/${telNr.id}">DELETE</a></td>
 </tr>
 </c:forEach>
-
 </tbody>
+<tfoot>
+    <tr>
+        <td colspan="7">
+            <a type="button" href="/add-telNr">
+                <center>ADD</center>
+            </a>
+        </td>
+    </tr>
+</tfoot>
 </table>
 <div>
 </div>

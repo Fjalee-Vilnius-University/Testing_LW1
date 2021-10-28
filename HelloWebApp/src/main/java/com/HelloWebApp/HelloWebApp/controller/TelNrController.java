@@ -1,5 +1,6 @@
 package com.HelloWebApp.HelloWebApp.controller;
 
+import com.HelloWebApp.HelloWebApp.model.Saskaita;
 import com.HelloWebApp.HelloWebApp.model.TelNr;
 import com.HelloWebApp.HelloWebApp.service.SaskaitaService;
 import com.HelloWebApp.HelloWebApp.service.TelNrService;
@@ -46,6 +47,23 @@ public class TelNrController {
         }
 
         telNrService.update(telNr);
+
+        return "redirect:/list-telNr";
+    }
+
+    @GetMapping("/add-telNr")
+    public String showAddPage(ModelMap model) {
+        model.addAttribute("telNr", new TelNr());
+        return "telNr";
+    }
+
+    @PostMapping("/add-telNr")
+    public String add(@ModelAttribute("tleNr") TelNr telNr, BindingResult result) {
+        if(result.hasErrors()) {
+            return "telNr";
+        }
+
+        telNrService.add(telNr);
 
         return "redirect:/list-telNr";
     }
