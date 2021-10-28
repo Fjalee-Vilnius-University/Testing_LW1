@@ -2,14 +2,15 @@ package com.prekes.web.prekesweb.controller;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,6 +24,7 @@ import com.prekes.web.prekesweb.service.ZmogusService;
 @RestController is a convenience annotation that does nothing more than adding the @Controller and @ResponseBody annotations
 */
 
+@RequestMapping("/zmones")
 @RestController
 public class ZmogusRestController {
 	@Autowired
@@ -31,31 +33,30 @@ public class ZmogusRestController {
 	@Autowired
 	PirkimasService servicePirkimas;
 	
-	// GET request
-	// localhost:8080/zmones
-	@GetMapping("/zmones")		
-	public Iterable<Zmogus> zmonesJson() {
-		return service.findAll(); // Spring converts java object to -> JSON
+	// GET request localhost:8080/zmones
+	@GetMapping(produces = {"application/json"}) //@GetMapping("/zmones")		
+	public ResponseEntity<List<Zmogus>> zmonesJson() {
+		return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
 	}
 	
-	// GET request
-	@GetMapping("/zmones/{zmogausId}")     // localhost:8080/zmones/2
-	public Zmogus zmogusById(@PathVariable int zmogausId) {
-		return service.findById(zmogausId); // Spring converts java object to -> JSON
+	// GET request localhost:8080/zmones/2
+	@GetMapping(path="/{zmogausId}", produces = {"application/json"})     
+	public ResponseEntity<Zmogus> zmogusById(@PathVariable int zmogausId) {
+		return new ResponseEntity<>(service.findById(zmogausId), HttpStatus.OK);
 	}
 	
-	// GET request
-	@GetMapping("/zmones/{zmogausId}/pirkimai") //GET request to http://localhost:8080/zmones/2/pirkimai
-	public List<Pirkimas> findPirkimaiForZmogus(@PathVariable int zmogausId) {
-		return service.findPirkimaiByCustomerId(zmogausId); // Spring converts java object to -> JSON
+	// GET request localhost:8080/zmones/1/pirkimai
+	@GetMapping(path="/{zmogausId}/pirkimai", produces = {"application/json"})
+	public ResponseEntity<List<Pirkimas>> findPirkimaiForZmogus(@PathVariable int zmogausId) {
+		return new ResponseEntity<>(service.findPirkimaiByCustomerId(zmogausId), HttpStatus.OK);
 	}	
 	
 	// POST request
-	// http://localhost:8080/zmones/2/pirkimai	
-	// POST request body example JSON: {"zmogausId":2,"prekesKodas":2,"vnt":10,"date":"2222-01-01","prekesPav":null}
+	// http://localhost:8080/zmones/1/pirkimai	
+	// POST request body example JSON: {"zmogausId":1,"prekesKodas":2,"vnt":10,"date":"2222-01-01","prekesPav":null}
 	// Value of response header 'location' is set to uri of newly created source, 
 	// e.g., http://localhost:8080/zmones/1/pirkimai/1-2-2222-01-01
-	@PostMapping("/zmones/{zmogausId}/pirkimai") 
+	@PostMapping(path="/{zmogausId}/pirkimai") 
 	public ResponseEntity<Void> addPirkimasToZmogus(@PathVariable String zmogausId, @RequestBody Pirkimas newPirkimas) {
 
 		// method parameter newPirkimas with annotation @RequestBody gets request body
@@ -75,10 +76,9 @@ public class ZmogusRestController {
 		return ResponseEntity.created(location).build();  // status: 201 Created
 	}
 	
-	// GET request
-	// http://localhost:8080/zmones/2/pirkimai/2-2-2021-09-02
-	@GetMapping("/zmones/{zmogausId}/pirkimai/{pirkimoId}") 
-	public Pirkimas retrieveDetailsForPirkimas(@PathVariable int zmogausId, @PathVariable String pirkimoId) {
-		return servicePirkimas.findById(pirkimoId); // Spring converts java object to -> JSON
+	// GET request http://localhost:8080/zmones/1/pirkimai/1-1-2021-09-01
+	@GetMapping(path="/{zmogausId}/pirkimai/{pirkimoId}", produces = {"application/json"}) 
+	public ResponseEntity<Pirkimas> retrieveDetailsForPirkimas(@PathVariable int zmogausId, @PathVariable String pirkimoId) {
+		return new ResponseEntity<>(servicePirkimas.findById(pirkimoId), HttpStatus.OK);
 	}
 }

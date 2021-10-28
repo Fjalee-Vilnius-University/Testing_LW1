@@ -4,11 +4,13 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,6 +22,7 @@ import com.prekes.web.prekesweb.service.PrekeService;
 @RestController is a convenience annotation that does nothing more than adding the @Controller and @ResponseBody annotations
 */
 
+@RequestMapping("/prekes")
 @RestController
 public class PrekeRestController {
 	@Autowired
@@ -27,23 +30,23 @@ public class PrekeRestController {
 	
 	// GET request
 	// http://localhost:8080/prekes
-	@GetMapping("/prekes") 
-	public List<Preke> prekesJson() {
-		return service.findAll(); // Spring converts java object to -> JSON
+	@GetMapping(produces = {"application/json"}) 
+	public ResponseEntity<List<Preke>> prekesJson() {
+		return new ResponseEntity<>(service.findAll(), HttpStatus.OK); // Spring converts java object to -> JSON
 	}
 	
 	// GET request
 	// http://localhost:8080/prekes/2
-	@GetMapping("/prekes/{prekeId}")
-	public Preke PrekeById(@PathVariable int prekeId) {
-		return service.findById(prekeId); // Spring converts java object to -> JSON
+	@GetMapping(path="/{prekeId}", produces = {"application/json"})
+	public ResponseEntity<Preke> PrekeById(@PathVariable int prekeId) {
+		return new ResponseEntity<>(service.findById(prekeId), HttpStatus.OK); // Spring converts java object to -> JSON
 	}
 	
 	// POST request
 	// http://localhost:8080/prekes	
 	// POST request body example JSON: {"kodas":15,"pavadinimas":"CCC","salis":"LV","kainaVnt":0.15}
 	// Value of response header 'location' is set to uri of newly created source, e.g., http://localhost:8080/prekes/15
-	@PostMapping("/prekes")
+	@PostMapping()
 	public ResponseEntity<Void> addPreke(@RequestBody Preke newPreke) {
 		
 		// method parameter newPreke with annotation @RequestBody gets request body

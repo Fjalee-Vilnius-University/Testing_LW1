@@ -1,6 +1,7 @@
 package com.prekes.web.prekesweb.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -53,6 +55,14 @@ class ZmogusRestControllerTest {
 	@MockBean
 	private PirkimasService pirkimasService;
 
+	// @MockBean zmogusService and pirkimasService are spring components
+	// Mockito doesn't know if these services were used in test and doesn't clean mock objects after each test
+	// therefore you need to reset these services after each test:
+	@AfterEach void tearDown() { 
+		reset(zmogusService); 	// Mockito resets object
+		reset(pirkimasService); // Mockito resets object 
+	}
+		
 	// Verify that WebApplicationContext object is loaded properly. 
 	// Verify that the right servletContext is being attached.
 	// Verify that controller bean exists in web context.
@@ -78,6 +88,7 @@ class ZmogusRestControllerTest {
 				
 		MvcResult result = mockMvc.perform(rb)
         				.andExpect(MockMvcResultMatchers.status().isOk()) // 200
+        				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
         				.andReturn();
 
 		String expected = "[{\"vardas\":\"AAA\",role:\"Admin\"},{\"vardas\":\"BBB\",role:\"User\"}]";
@@ -96,6 +107,7 @@ class ZmogusRestControllerTest {
 		
 		MvcResult result = mockMvc.perform(rb)
         				.andExpect(MockMvcResultMatchers.status().isOk())
+        				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
         				.andReturn();
 
 		String expected = "{\"vardas\":\"AAA\",role:\"Admin\"}";
@@ -117,6 +129,7 @@ class ZmogusRestControllerTest {
                                 .get("/zmones/1/pirkimai")
                                 .accept(MediaType.APPLICATION_JSON))
                 				.andExpect(MockMvcResultMatchers.status().isOk())
+                				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 				.andReturn();
 
         String expected = "["
@@ -163,8 +176,13 @@ class ZmogusRestControllerTest {
 		
 		//2) invocation:
 		//send GET request to url "/zmones/{zmogausId}/pirkimai/{pirkimoId}" and accept JSON response
-		RequestBuilder rb = MockMvcRequestBuilders.get("/zmones/1/pirkimai/1-1-1111-11-11").accept(MediaType.APPLICATION_JSON);
-		MvcResult result = mockMvc.perform(rb).andReturn();
+		RequestBuilder rb = MockMvcRequestBuilders
+				.get("/zmones/1/pirkimai/1-1-1111-11-11")
+				.accept(MediaType.APPLICATION_JSON);
+		
+		MvcResult result = mockMvc.perform(rb)
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andReturn();
 
 		//3) verify:		
 		String expected = "{\"zmogausId\":1,\"prekesKodas\":1,\"vnt\":1,\"date\":\"1111-11-11\",\"prekesPav\":null}";

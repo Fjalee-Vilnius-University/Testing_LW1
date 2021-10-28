@@ -1,11 +1,13 @@
 package com.prekes.web.prekesweb.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,17 @@ class PrekeRestControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	// use @MockBean to add mock objects to the Spring application context.
 	@MockBean
-	PrekeService service;
+	PrekeService service; 
+	
+	// @MockBean PrekeService service is a spring component
+	// Mockito doesn't know if service was used in test and doesn't clean mock object after each test
+	// therefore you need to reset service after each test:  
+	@AfterEach
+	void tearDown() {
+		reset(service); // Mockito resets object
+	}
 	
 	@Test
 	void testShowPrekesList() throws Exception {
@@ -47,6 +58,7 @@ class PrekeRestControllerTest {
 		//MvcResult result = mockMvc.perform(rb).andReturn();
         MvcResult result = mockMvc.perform(rb)
 				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 
 		//3) verify:

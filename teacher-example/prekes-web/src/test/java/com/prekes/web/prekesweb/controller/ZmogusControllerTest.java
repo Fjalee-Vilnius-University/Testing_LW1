@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,4 +120,51 @@ class ZmogusControllerTest {
 		verify(zmogusService).add(Mockito.any(Zmogus.class)); // verifying mock call 1 time
 	}
 
+	@Test
+    public void testShowUpdatePage() throws Exception {
+		when(zmogusService.findById(Mockito.anyInt())).thenReturn(new Zmogus("AAA", "Admin"));
+		
+		RequestBuilder rb = MockMvcRequestBuilders.get("/update-zmogus/1");
+
+        MvcResult result = mockMvc.perform(rb)
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("zmogus"))
+				.andExpect(MockMvcResultMatchers.forwardedUrl("/WEB-INF/jsp/zmogus.jsp"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("zmogus"))
+				.andExpect(MockMvcResultMatchers.model().attribute("zmogus",  hasProperty("vardas", Matchers.equalTo("AAA"))))
+				.andExpect(MockMvcResultMatchers.model().attribute("zmogus",  hasProperty("role", Matchers.equalTo("Admin"))))
+				.andReturn();
+    }
+	
+	@Test
+	void testUpdate() throws Exception {
+		// Send POST request
+		// Pass @ModelAttribute Zmogus object with flashAttr()
+		RequestBuilder requestBuilder = MockMvcRequestBuilders
+				.post("/update-zmogus/1")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("vardas", "AAA")
+				.param("role", "Admin")
+				.flashAttr("zmogus", new Zmogus("AAA", "Admin"));
+
+		mockMvc.perform(requestBuilder)
+				.andExpect(MockMvcResultMatchers.status().isFound()) // 302 -	status found after redirect
+				.andExpect(MockMvcResultMatchers.redirectedUrl("/list-zmones")) // .andExpect(MockMvcResultMatchers.view().name("redirect:/list-zmones"))
+				.andReturn();
+		
+		verify(zmogusService).update(Mockito.any(Zmogus.class)); // verifying mock call 1 time
+	}
+	
+	@Test
+	void testDelete() throws Exception {
+		// Send POST request
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/delete-zmogus/1");
+
+		mockMvc.perform(requestBuilder)
+				.andExpect(MockMvcResultMatchers.status().isFound()) // 302 -	status found after redirect
+				.andExpect(MockMvcResultMatchers.redirectedUrl("/list-zmones")) // .andExpect(MockMvcResultMatchers.view().name("redirect:/list-zmones"))
+				.andReturn();
+		
+		verify(zmogusService).deleteById(Mockito.anyInt()); // verifying mock call 1 time
+	}
 }

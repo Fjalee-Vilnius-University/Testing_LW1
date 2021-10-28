@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -20,6 +22,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.prekes.web.prekesweb.PrekesWebApplication;
 import com.prekes.web.prekesweb.model.Pirkimas;
+import com.prekes.web.prekesweb.model.Zmogus;
+import com.prekes.web.prekesweb.service.ZmogusService;
 
 //Part1: Initialize and launch SpringBoot application
 //Full Spring application context is started but without the server
@@ -36,6 +40,19 @@ class ZmogusRestControllerIT {
 	@LocalServerPort
 	private int port;
 	
+	@Autowired
+	TestRestTemplate restTemplate; // Spring injects TestRestTemplate and knows the random number of port
+	
+	@Autowired
+	ZmogusService service;
+	
+	private Zmogus zmogus;
+	
+	@BeforeEach
+	void setUp() {
+		zmogus = service.findAll().get(0);
+	}
+	
 	@Test
 	void test() {
 		System.out.println("PORT=" + port);
@@ -47,8 +64,8 @@ class ZmogusRestControllerIT {
 	@Test
 	void testRetrieveDetailsForPirkimas1() throws Exception {
 		
-		String url = "http://localhost:" + port	+ "/zmones/1/pirkimai/1-3-2021-09-02";
-		TestRestTemplate restTemplate = new TestRestTemplate();
+		//String url = "http://localhost:" + port	+ "/zmones/1/pirkimai/1-3-2021-09-02";
+		String url = "/zmones/1/pirkimai/1-3-2021-09-02";
 
 		// Invote GET request on url, receive response and convert it to object String.class or Pirkimas.class
 		String   responseAsString = restTemplate.getForObject(url, String.class);
@@ -68,8 +85,8 @@ class ZmogusRestControllerIT {
 	// better use WebTestClient (see example below)
 	@Test
 	void testRetrieveDetailsForPirkimas2() throws Exception {
-		String url = "http://localhost:" + port	+ "/zmones/1/pirkimai/1-3-2021-09-02";
-		TestRestTemplate restTemplate = new TestRestTemplate();
+		//String url = "http://localhost:" + port	+ "/zmones/1/pirkimai/1-3-2021-09-02";
+		String url = "/zmones/1/pirkimai/1-3-2021-09-02";
 		
 		// set value of request header to Accept: application/json
 		HttpHeaders headers = new HttpHeaders();
@@ -113,8 +130,8 @@ class ZmogusRestControllerIT {
 	// better use WebTestClient
 	@Test
 	void testFindPirkimaiForZmogus() {
-		String url = "http://localhost:" + port	+ "/zmones/1/pirkimai";
-		TestRestTemplate restTemplate = new TestRestTemplate();
+		//String url = "http://localhost:" + port	+ "/zmones/1/pirkimai";
+		String url = "/zmones/1/pirkimai";
 		
 		// Set value of request header to Accept: application/json
 		HttpHeaders headers = new HttpHeaders();
@@ -131,7 +148,6 @@ class ZmogusRestControllerIT {
 		
 		System.out.println("RESPONSE_3:" + response.getBody());
 			
-			
 		Pirkimas sample = new Pirkimas(1, 3, 5, "2021-09-02");
 
 		assertTrue(response.getBody().contains(sample));
@@ -142,9 +158,9 @@ class ZmogusRestControllerIT {
 	// better use WebTestClient (see example below)
 	@Test
 	void testAddPirkimasToZmogus1() {
-		System.out.println("~~~ PORT=" + port);
-		String url = "http://localhost:" + port	+ "/zmones/1/pirkimai";
-		TestRestTemplate restTemplate = new TestRestTemplate();
+		
+		//String url = "http://localhost:" + port	+ "/zmones/1/pirkimai";
+		String url = "/zmones/1/pirkimai";
 		
 		// Set value of request header to Accept: application/json
 		HttpHeaders headers = new HttpHeaders();
@@ -172,6 +188,7 @@ class ZmogusRestControllerIT {
 	@Test
 	void testAddPirkimasToZmogus() {
 		Pirkimas pirk = new Pirkimas(1, 2, 200, "2025-02-20");
+		
 		WebTestClient
 		  .bindToServer()
 		    .baseUrl("http://localhost:" + port)
@@ -190,7 +207,17 @@ class ZmogusRestControllerIT {
 
 	@Test
 	void testZmogusById() {
-		//fail("Not yet implemented");
+		String expected = "{id:" + zmogus.getId() + ", vardas:\"" + zmogus.getVardas() + "\"" + ", role:\"" + zmogus.getRole() + "\"}";
+		
+		WebTestClient
+		  .bindToServer()
+		    .baseUrl("http://localhost:" + port)
+		    .build()
+		    .get()
+		    .uri("/zmones/" + zmogus.getId())
+		  .exchange()
+		    .expectStatus().isOk()			// 200
+		    .expectHeader().valueEquals("Content-Type", "application/json")
+		    .expectBody().json(expected);
 	}
-
 }
