@@ -23,5 +23,7 @@ public class TelNrService {
         repository.deleteById(id);
     }
     public TelNr add (TelNr telNr) { return repository.save(telNr); }
+    public TelNr findById (int id) { return repository.findById(id).get(); }
+
 
 }

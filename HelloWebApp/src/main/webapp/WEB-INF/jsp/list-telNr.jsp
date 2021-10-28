@@ -18,13 +18,13 @@
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${telNr}" var="nr">
+<c:forEach items="${telNr}" var="telNr">
 <tr>
-<td>${nr.id}</td>
-<td>${nr.telNr}</td>
-<td>${nr.userId}</td>
-<td><a type="button" href="/update-telNr/${nr.id}">UPDATE</a></td>
-<td><a type="button" href="/delete-telNr/${nr.id}">DELETE</a></td>
+<td>${telNr.id}</td>
+<td>${telNr.nr}</td>
+<td>${telNr.userId}</td>
+<td><a type="button" href="/update-telNr/${telNr.id}">UPDATE</a></td>
+<td><a type="button" href="/delete-telNr/${telNr.id}">DELETE</a></td>
 </tr>
 </c:forEach>
 

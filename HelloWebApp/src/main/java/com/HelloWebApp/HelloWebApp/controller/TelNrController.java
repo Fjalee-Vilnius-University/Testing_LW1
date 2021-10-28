@@ -28,11 +28,18 @@ public class TelNrController {
         return "redirect:/list-telNr";
     }
 
+    @GetMapping("/update-telNr/{id}")
+    public String showUpdatePage(ModelMap model, @PathVariable int id) {
+        model.addAttribute("telNr", telNrService.findById(id));
+        return "telNr";
+    }
+
     @PostMapping("/update-telNr/{id}")
-    public String update(ModelMap model, @ModelAttribute("telNr") TelNr telNr, BindingResult result) {
+    public String update(@ModelAttribute("telNr") TelNr telNr, BindingResult result) {
         if(result.hasErrors()) {
             return "telNr";
         }
+
         telNrService.update(telNr);
         return "redirect:/list-telNr";
     }

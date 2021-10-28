@@ -24,11 +24,11 @@ public class TelNrCommandLineRunner implements CommandLineRunner{
 		repository.save(new TelNr("+37064444444", 4));
 		repository.save(new TelNr("+37065555555", 5));
 
-		for (TelNr nr : repository.findAll()) {
-			log.info(nr.toString());
+		for (TelNr telNr : repository.findAll()) {
+			log.info(telNr.toString());
 		}
 
-		log.info(repository.findByTelNr("+37063333333").toString());
+		log.info(repository.findByNr("+37063333333").toString());
 	}
 
 }

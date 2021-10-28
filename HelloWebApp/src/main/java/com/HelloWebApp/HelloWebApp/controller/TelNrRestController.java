@@ -23,17 +23,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class TelNrRestController {
 	@Autowired
 	TelNrService service;
-/*
+
 	@GetMapping("/telNr")
-	public List<TelNr> prekesJson() {
-		return service.findAll(); // Spring converts java object to -> JSON
+	public List<TelNr> telNrJson() {
+		return service.findAll();
 	}
 	
-	@GetMapping("/prekes/{id}")
+	@GetMapping("/telNr/{id}")
 	public TelNr TelNrById(@PathVariable int id) {
-		return service.findById(id); // Spring converts java object to -> JSON
-	}*/
-	
+		return service.findById(id);
+	}
+
 	@PostMapping("/telNr")
 	public ResponseEntity<Void> addTelNr(@RequestBody TelNr newTelNr) {
 		TelNr nr = service.add(newTelNr);
