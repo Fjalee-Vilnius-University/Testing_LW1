@@ -12,6 +12,7 @@
 <tr>
 <th>Id</th>
 <th>TelNrId</th>
+<th>TelNr</th>
 <th>Menuo</th>
 <th>Suma</th>
 <th>Update</th>
@@ -23,14 +24,23 @@
 <tr>
 <td>${saskaita.id}</td>
 <td>${saskaita.telNrId}</td>
+<td>${saskaita.telNr}</td>
 <td>${saskaita.menuo}</td>
 <td>${saskaita.suma}</td>
 <td><a type="button" href="/update-saskaita/${saskaita.id}">UPDATE</a></td>
 <td><a type="button" href="/delete-saskaita/${saskaita.id}">DELETE</a></td>
 </tr>
 </c:forEach>
-
 </tbody>
+<tfoot>
+    <tr>
+        <td colspan="7">
+            <a type="button" href="/add-saskaita">
+                <center>ADD</center>
+            </a>
+        </td>
+    </tr>
+</tfoot>
 </table>
 <div>
 </div>

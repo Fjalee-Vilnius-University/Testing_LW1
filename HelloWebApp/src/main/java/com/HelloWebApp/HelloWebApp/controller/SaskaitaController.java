@@ -1,7 +1,9 @@
 package com.HelloWebApp.HelloWebApp.controller;
 
 import com.HelloWebApp.HelloWebApp.model.Saskaita;
+import com.HelloWebApp.HelloWebApp.model.TelNr;
 import com.HelloWebApp.HelloWebApp.service.SaskaitaService;
+import com.HelloWebApp.HelloWebApp.service.TelNrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SaskaitaController {
     @Autowired
     SaskaitaService saskaitaService;
+    @Autowired
+    TelNrService telNrService;
 
     @GetMapping("/list-saskaita")
     public String showSaskaita(ModelMap model) {
@@ -40,7 +44,37 @@ public class SaskaitaController {
             return "saskaita";
         }
 
+        SetTelNr(saskaita);
         saskaitaService.update(saskaita);
+
         return "redirect:/list-saskaita";
+    }
+
+    @GetMapping("/add-saskaita")
+    public String showAddPage(ModelMap model) {
+        model.addAttribute("saskaita", new Saskaita());
+        return "saskaita";
+    }
+
+    @PostMapping("/add-saskaita")
+    public String add(@ModelAttribute("saskaita") Saskaita saskaita, BindingResult result) {
+        if(result.hasErrors()) {
+            return "saskaita";
+        }
+
+        SetTelNr(saskaita);
+        saskaitaService.add(saskaita);
+
+        return "redirect:/list-saskaita";
+    }
+
+    private void SetTelNr(Saskaita saskaita){
+        TelNr telNr = telNrService.findById(saskaita.getTelNrId());
+        if (telNr != null){
+            saskaita.setTelNr(telNr.getNr());
+        }
+        else{
+            saskaita.setTelNr("Tel.Nr. not found");
+        }
     }
 }

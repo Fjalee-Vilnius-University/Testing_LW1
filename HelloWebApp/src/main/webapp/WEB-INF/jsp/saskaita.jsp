@@ -7,15 +7,15 @@
 		<form:input path="id" type="hidden" required="required" />
 		<form:errors path="id" />
 
-		<form:label path="telNrId">Tel.Nr.</form:label>
+		<form:label path="telNrId">Tel.Nr.Id.</form:label>
 		<form:input path="telNrId" type="text" required="required" />
 		<form:errors path="telNrId" />
 
-		<form:label path="menuo">UserId</form:label>
+		<form:label path="menuo">Menuo</form:label>
 		<form:input path="menuo" type="text" required="required" />
 		<form:errors path="menuo" />
 
-		<form:label path="suma">UserId</form:label>
+		<form:label path="suma">Suma</form:label>
 		<form:input path="suma" type="text" required="required" />
 		<form:errors path="suma" />
 
