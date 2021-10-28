@@ -1,6 +1,7 @@
 package com.HelloWebApp.HelloWebApp.controller;
 
 import com.HelloWebApp.HelloWebApp.model.TelNr;
+import com.HelloWebApp.HelloWebApp.service.SaskaitaService;
 import com.HelloWebApp.HelloWebApp.service.TelNrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class TelNrController {
     @Autowired
     TelNrService telNrService;
+    @Autowired
+    SaskaitaService saskaitaService;
 
     @GetMapping("/list-telNr")
     public String showTelNr(ModelMap model) {
@@ -25,6 +28,8 @@ public class TelNrController {
     @GetMapping("/delete-telNr/{id}")
     public String deleteTelNr(@PathVariable int id) {
         telNrService.deleteById(id);
+        saskaitaService.deleteByTelNrId(id);
+
         return "redirect:/list-telNr";
     }
 
@@ -41,6 +46,7 @@ public class TelNrController {
         }
 
         telNrService.update(telNr);
+
         return "redirect:/list-telNr";
     }
 }
