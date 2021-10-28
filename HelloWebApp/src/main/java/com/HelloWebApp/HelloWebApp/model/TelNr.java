@@ -16,13 +16,11 @@ public class TelNr {
     public TelNr() {}
 
     public TelNr(String nr, int userId) {
-        super();
         this.nr = nr;
         this.userId = userId;
     }
 
     public TelNr(int id, String nr, int userId) {
-        super();
         this.nr = nr;
         this.userId = userId;
         this.id = id;

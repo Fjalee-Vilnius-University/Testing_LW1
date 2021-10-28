@@ -14,11 +14,17 @@ public class Saskaita {
     private int menuo;
     private int suma;
 
-    protected Saskaita() {
+    public Saskaita() {
     }
 
     public Saskaita(int id, int telNrId, int menuo, int suma) {
         this.id = id;
+        this.telNrId = telNrId;
+        this.menuo = menuo;
+        this.suma = suma;
+    }
+
+    public Saskaita(int telNrId, int menuo, int suma) {
         this.telNrId = telNrId;
         this.menuo = menuo;
         this.suma = suma;

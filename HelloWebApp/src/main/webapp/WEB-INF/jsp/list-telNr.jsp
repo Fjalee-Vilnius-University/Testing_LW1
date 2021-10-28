@@ -11,7 +11,7 @@
 <thead>
 <tr>
 <th>Id</th>
-<th>TelNr</th>
+<th>Nr</th>
 <th>UserId</th>
 <th>Update</th>
 <th>Delete</th>
