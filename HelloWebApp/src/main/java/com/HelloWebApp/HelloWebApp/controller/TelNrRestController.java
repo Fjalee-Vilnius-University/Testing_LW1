@@ -1,18 +1,20 @@
 package com.HelloWebApp.HelloWebApp.controller;
 
-import java.net.URI;
-import java.util.List;
-
 import com.HelloWebApp.HelloWebApp.model.TelNr;
+import com.HelloWebApp.HelloWebApp.model.TelNr;
+import com.HelloWebApp.HelloWebApp.service.SaskaitaService;
+import com.HelloWebApp.HelloWebApp.service.TelNrService;
 import com.HelloWebApp.HelloWebApp.service.TelNrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
 
 /*
 @Controller is used to mark classes as Spring MVC Controller.
@@ -22,28 +24,37 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 public class TelNrRestController {
 	@Autowired
-	TelNrService service;
+	TelNrService telNrService;
+	@Autowired
+	SaskaitaService saskaitaService;
 
 	@GetMapping("/telNr")
 	public List<TelNr> telNrJson() {
-		return service.findAll();
+		return telNrService.findAll();
 	}
-	
+
 	@GetMapping("/telNr/{id}")
 	public TelNr TelNrById(@PathVariable int id) {
-		return service.findById(id);
+		return telNrService.findById(id);
 	}
 
 	@PostMapping("/telNr")
 	public ResponseEntity<Void> addTelNr(@RequestBody TelNr newTelNr) {
-		TelNr nr = service.add(newTelNr);
+		TelNr nr = telNrService.add(newTelNr);
 
 		if (nr == null)
 			return ResponseEntity.noContent().build();
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(nr.getId()).toUri();
+				.path("/{id}").buildAndExpand(nr.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
-	}	
+	}
+
+	@DeleteMapping("/telNr/{id}")
+	public ResponseEntity<Void> deleteTelNr(@PathVariable int id) {
+		telNrService.deleteById(id);
+
+		return ResponseEntity.noContent().build();
+	}
 }
