@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6a4f71d2-1678-48ba-8e22-e7e39e78a4bc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../HelloWebApp/src/test/java/com/HelloWebApp/HelloWebApp/controller/SaskaitaControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HelloWebApp/src/test/java/com/HelloWebApp/HelloWebApp/controller/SaskaitaControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HelloWebApp/src/test/java/com/HelloWebApp/HelloWebApp/controller/SaskaitaRestControlleTest.r.java" beforeDir="false" afterPath="$PROJECT_DIR$/../HelloWebApp/src/test/java/com/HelloWebApp/HelloWebApp/controller/SaskaitaRestControlleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HelloWebApp/src/test/java/com/HelloWebApp/HelloWebApp/controller/TelNrControllerTest..java" beforeDir="false" afterPath="$PROJECT_DIR$/../HelloWebApp/src/test/java/com/HelloWebApp/HelloWebApp/controller/TelNrControllerTest..java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="20EN4Py4SQ6gXyHDJO50VevWw6p" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6a4f71d2-1678-48ba-8e22-e7e39e78a4bc" name="Changes" comment="" />
+      <created>1635605598169</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635605598169</updated>
+      <workItem from="1635605602872" duration="1747000" />
+      <workItem from="1635859468712" duration="1855000" />
+      <workItem from="1635861472192" duration="7445000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/prekes-web/src/test/java/com/prekes/web/prekesweb/controller/PrekeControllerTest.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
