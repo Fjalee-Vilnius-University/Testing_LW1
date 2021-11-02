@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.regex.Pattern;
 
 @Entity
 public class TelNr {
@@ -16,12 +17,12 @@ public class TelNr {
     public TelNr() {}
 
     public TelNr(String nr, int userId) {
-        this.nr = nr;
+        setNr(nr);
         this.userId = userId;
     }
 
     public TelNr(int id, String nr, int userId) {
-        this.nr = nr;
+        setNr(nr);
         this.userId = userId;
         this.id = id;
     }
@@ -36,7 +37,14 @@ public class TelNr {
     }
 
     public void setNr(String nr) {
-        this.nr = nr;
+        Pattern telNrLongPattern = Pattern.compile("^\\+3706[0-9]{7}$");
+        Pattern telNrShortPattern = Pattern.compile("^86[0-9]{7}$");
+        if (telNrLongPattern.matcher(nr).matches() || telNrShortPattern.matcher(nr).matches()){
+            this.nr = nr;
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
     }
 
     public int getUserId() {
