@@ -12,8 +12,7 @@ import com.HelloWebApp.HelloWebApp.model.Saskaita;
 import com.HelloWebApp.HelloWebApp.model.TelNr;
 import com.HelloWebApp.HelloWebApp.service.SaskaitaService;
 import com.HelloWebApp.HelloWebApp.service.TelNrService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +26,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = HelloWebAppApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SaskaitaRestControllerIT {
     @LocalServerPort
@@ -40,6 +40,7 @@ class SaskaitaRestControllerIT {
     @Autowired
     TelNrService telNrService;
 
+    @Order(1)
     @Test
     void addSaskaita_correct() throws Exception {
         var expected1 = "[{\"id\":1,\"telNrId\":8,\"menuo\":3,\"suma\":5,\"telNr\":\"+37061111111\"},{\"id\":2,\"telNrId\":8,\"menuo\":5,\"suma\":75,\"telNr\":\"+37061111111\"},{\"id\":3,\"telNrId\":8,\"menuo\":7,\"suma\":53,\"telNr\":\"+37061111111\"},{\"id\":4,\"telNrId\":10,\"menuo\":2,\"suma\":30,\"telNr\":\"+37063333333\"},{\"id\":5,\"telNrId\":9,\"menuo\":2,\"suma\":21,\"telNr\":\"+37062222222\"},{\"id\":6,\"telNrId\":9,\"menuo\":8,\"suma\":72,\"telNr\":\"+37062222222\"},{\"id\":7,\"telNrId\":12,\"menuo\":7,\"suma\":50,\"telNr\":\"+37065555555\"}]";
@@ -62,6 +63,7 @@ class SaskaitaRestControllerIT {
         JSONAssert.assertEquals(expected2, responseAsString2, false);
     }
 
+    @Order(2)
     @Test
     void deleteSaskaita_correct() throws Exception {
         var expected1 = "[{\"id\":1,\"telNrId\":8,\"menuo\":3,\"suma\":5,\"telNr\":\"+37061111111\"},{\"id\":2,\"telNrId\":8,\"menuo\":5,\"suma\":75,\"telNr\":\"+37061111111\"},{\"id\":3,\"telNrId\":8,\"menuo\":7,\"suma\":53,\"telNr\":\"+37061111111\"},{\"id\":4,\"telNrId\":10,\"menuo\":2,\"suma\":30,\"telNr\":\"+37063333333\"},{\"id\":5,\"telNrId\":9,\"menuo\":2,\"suma\":21,\"telNr\":\"+37062222222\"},{\"id\":6,\"telNrId\":9,\"menuo\":8,\"suma\":72,\"telNr\":\"+37062222222\"},{\"id\":7,\"telNrId\":12,\"menuo\":7,\"suma\":50,\"telNr\":\"+37065555555\"},{\"id\":13,\"telNrId\":9,\"menuo\":1,\"suma\":1,\"telNr\":\"+37062222222\"}]";
