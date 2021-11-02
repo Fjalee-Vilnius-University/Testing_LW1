@@ -47,7 +47,8 @@ class SaskaitaRepositoryTest {
 
         repository.delete(saskaita);
         saskaitaById = repository.findById(id);
-        assertNull(saskaitaById);
+
+        assertTrue(saskaitaById.isEmpty());
     }
 
     @Test
