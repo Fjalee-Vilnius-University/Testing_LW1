@@ -30,5 +30,4 @@ public class TelNrCommandLineRunner implements CommandLineRunner{
 
 		log.info(repository.findByNr("+37063333333").toString());
 	}
-
 }

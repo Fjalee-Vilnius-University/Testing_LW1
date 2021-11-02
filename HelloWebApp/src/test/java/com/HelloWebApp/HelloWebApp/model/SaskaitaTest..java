@@ -1,15 +1,8 @@
 package com.HelloWebApp.HelloWebApp.model;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.validation.constraints.AssertTrue;
 
 class SaskaitaTest {
     private Saskaita saskaita;
