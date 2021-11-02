@@ -39,7 +39,8 @@ public class TelNr {
     public void setNr(String nr) {
         Pattern telNrLongPattern = Pattern.compile("^\\+3706[0-9]{7}$");
         Pattern telNrShortPattern = Pattern.compile("^86[0-9]{7}$");
-        if (telNrLongPattern.matcher(nr).matches() || telNrShortPattern.matcher(nr).matches()){
+        Pattern telNrNotFound = Pattern.compile("^Tel\\.Nr\\. not found$");
+        if (telNrLongPattern.matcher(nr).matches() || telNrShortPattern.matcher(nr).matches() || telNrNotFound.matcher(nr).matches()){
             this.nr = nr;
         }
         else{
