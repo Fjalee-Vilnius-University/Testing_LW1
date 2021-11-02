@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.regex.Pattern;
 
 @Entity
 public class Saskaita {
@@ -24,14 +25,14 @@ public class Saskaita {
     public Saskaita(int id, int telNrId, int menuo, int suma, String telNr) {
         this.id = id;
         this.telNrId = telNrId;
-        this.menuo = menuo;
+        setMenuo(menuo);
         this.suma = suma;
         this.telNr = telNr;
     }
 
     public Saskaita(int telNrId, int menuo, int suma, String telNr) {
         this.telNrId = telNrId;
-        this.menuo = menuo;
+        setMenuo(menuo);
         this.suma = suma;
         this.telNr = telNr;
     }
@@ -62,7 +63,13 @@ public class Saskaita {
     }
 
     public void setMenuo(int menuo) {
-        this.menuo = menuo;
+        if (menuo > 0 && menuo <= 12){
+            this.menuo = menuo;
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+
     }
 
     public int getSuma() {
